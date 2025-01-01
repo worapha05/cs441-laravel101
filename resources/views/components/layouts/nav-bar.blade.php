@@ -26,6 +26,7 @@
             <a href="{{ route('blog.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">Blog</a>
             <a href="{{ route('about.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">About</a>
             <a href="{{ route('songs.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">Songs</a>
+            <a href="{{ route('artists.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">Artists</a>
         </div>
     </div>
 </nav>

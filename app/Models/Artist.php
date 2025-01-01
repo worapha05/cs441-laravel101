@@ -11,6 +11,7 @@ class Artist extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['name', 'image_path'];
     public function songs(): HasMany
     {
         return $this->hasMany(Song::class);

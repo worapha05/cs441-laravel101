@@ -11,6 +11,7 @@ class Song extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['artist_id', 'title', 'duration'];
     public function artist(): BelongsTo
     {
         return $this->belongsTo(Artist::class);
