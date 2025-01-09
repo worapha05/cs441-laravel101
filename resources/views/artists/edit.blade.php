@@ -9,8 +9,16 @@
                 @method('PUT')
                 <div class="mb-5">
                     <label for="artist_name" class="block mb-2 font-bold text-gray-600">Artist Name</label>
-                    <input type="text" id="artist_name" name="name" value="{{ $artist->name }}"
-                           class="border border-gray-300 shadow p-3 w-full rounded mb-"></input>
+                    @error('name')
+                    <p class="text-red-500 text-sm">
+                        {{ $message }}
+                    </p>
+                    @enderror
+                    <input type="text" id="name"
+                           name="name" value="{{ old('name', $artist->name) }}"
+                           autocomplete="off" placeholder="Put in artist name"
+                           class="border border-gray-300 shadow p-3 w-full rounded
+                                  @error('name') border-red-400 @enderror" />
                 </div>
                 <button type="submit" class="block mx-auto bg-blue-500 text-white font-bold px-4 py-2 rounded-lg">
                     Edit

@@ -3,12 +3,16 @@
         Artist: {{ $artist->name }}
     </h1>
 
+    <img class="w-48 h-48" src="{{ $artist->artist_image }}" alt="{{ $artist->name }}">
+
+    @can('update', $artist)
     <div>
         <a class="inline-block py-2 px-4 border border-gray-700 bg-pink-100"
            href="{{ route('artists.edit', ['artist' => $artist]) }}">
             Edit Artist
         </a>
     </div>
+    @endcan
 
     <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
         <div class="bg-pink-100 py-2 px-4">

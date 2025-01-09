@@ -23,10 +23,24 @@
         </div>
 
         <div class="lg:flex flex-col lg:flex-row lg:space-x-4 lg:mt-0 mt-4 flex flex-col items-center text-xl">
-            <a href="{{ route('blog.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">Blog</a>
-            <a href="{{ route('about.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">About</a>
-            <a href="{{ route('songs.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">Songs</a>
-            <a href="{{ route('artists.index') }}" class="text-white px-4 py-2 hover:text-gray-200 ">Artists</a>
+            <a href="{{ route('blog.index') }}" class="text-white px-4 py-2 hover:text-gray-200">Blog</a>
+            <a href="{{ route('about.index') }}" class="text-white px-4 py-2 hover:text-gray-200">About</a>
+            <a href="{{ route('songs.index') }}" class="text-white px-4 py-2 hover:text-gray-200">Songs</a>
+            <a href="{{ route('artists.index') }}" class="text-white px-4 py-2 hover:text-gray-200">Artists</a>
+            @auth
+                <a href="{{ route('playlists.index') }}" class="text-white px-4 py-2 hover:text-gray-200">Playlists</a>
+            @endauth
+            @guest
+                <a href="{{ route('register') }}" class="text-white px-4 py-2 hover:text-gray-200">Register</a>
+                <a href="{{ route('login') }}" class="text-white px-4 py-2 hover:text-gray-200">Login</a>
+            @else
+                <p class="text-amber-200 px-4 py-2 hover:text-gray-200">{{ auth()->user()->name }}</p>
+                <form action="{{ route('logout') }}" method="POST" class="text-white px-4 py-2 hover:text-gray-200">
+                    @csrf
+                    <button type="submit" class="text-white px-4 py-2 hover:text-gray-200">Logout</button>
+                </form>
+            @endguest
         </div>
+
     </div>
 </nav>

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArtistRequest;
+use App\Http\Requests\UpdateArtistRequest;
 use App\Models\Artist;
 use App\Repositories\ArtistRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ArtistController extends Controller
 {
@@ -26,16 +29,25 @@ class ArtistController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Artist::class);
         return view('artists.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArtistRequest $request)
     {
+        Gate::authorize('create', Artist::class);
+
+        $request->validated();
+
         $name = $request->input('name');
-        $artist = $this->artistRepository->create(['name' => $name]);
+        $file = $request->file('image');
+
+        $filename = time() . '-' . $file->getClientOriginalName();
+        $path = $file?->storeAs('artists', $filename, 'public');
+        $artist = $this->artistRepository->create(['name' => $name, 'image_path' => $path]);
         return redirect()->route('artists.show', ['artist' => $artist]);
     }
 
@@ -52,14 +64,19 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
+        Gate::authorize('update', $artist);
         return view('artists.edit', ['artist' => $artist]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Artist $artist)
+    public function update(UpdateArtistRequest $request, Artist $artist)
     {
+        Gate::authorize('update', $artist);
+
+        $request->validated();
+
         $name = $request->input('name');
         $this->artistRepository->update(['name' => $name], $artist->id);
         return redirect()->route('artists.show', ['artist' => $artist]);
@@ -70,9 +87,10 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
+        Gate::authorize('delete', $artist);
         if ($artist->songs->count() > 0) {
             return redirect()->route('artists.edit', ['artist' => $artist])
-                ->with('error', 'Artist already exists.');
+                ->with('error', 'Artist already has a song.');
         }
         $this->artistRepository->delete($artist->id);
         return redirect()->route('artists.index');

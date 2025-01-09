@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
@@ -36,5 +37,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('artists', ArtistController::class);
+
+Route::resource('/playlists', PlaylistController::class);
 
 require __DIR__.'/auth.php';

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->enum('course_code', array('2560', '2565'));
+            $table->enum('curriculum_code', array('2560', '2565'));
             $table->string('code');
             $table->string('thai_name');
             $table->string('eng_name');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('practice_hours')->nullable();
             $table->integer('self_study_hours')->nullable();
             $table->string('condition')->nullable();
+            $table->timestamps();
         });
     }
 
