@@ -1,0 +1,74 @@
+@accessToken = 10|M2Qr83k0duFIIzOdi790fk2rgaTdHFl4SBfS5nav16dcf43d
+@adminATK = 11|WLzwqpLf59eyDoFP91bvo4W5lFcRLlelOHVX53fD83ccc353
+
+### GET request to /api/artists
+GET {{host}}/api/artists
+###
+
+### GET request to /api/artists/{id}
+GET {{host}}/api/artists/51
+Accept: application/json
+###
+
+### POST request to /api/artists
+POST {{host}}/api/artists
+Accept: application/json
+Content-Type: application/json
+
+{ "name": "นูโว" }
+###
+
+### POST request to /api/artists with image
+POST {{host}}/api/artists
+Accept: application/json
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="image"; filename="cat.jpg"
+
+// The 'cat.jpg' file will be uploaded
+< ./cat.jpg
+--boundary
+Content-Disposition: form-data; name="name"
+
+Artist Cat
+--boundary
+###
+
+### PUT request to /api/artists/{id}
+PUT {{host}}/api/artists/50
+Accept: application/json
+Content-Type: application/json
+
+{ "name" : "สาว สาว สาว" }
+###
+
+### DELETE request to /api/artists/{id}
+DELETE {{host}}/api/artists/51
+Accept: application/json
+
+###
+
+### GET request to user
+GET {{host}}/api/user
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+
+### PUT request to /api/artists/{id}
+PUT {{host}}/api/artists/10
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{adminATK}}
+
+{ "name" : "ซิลลี่ ฟูลส์"}
+###
+
+### DELETE request to revoke
+DELETE {{host}}/api/revoke
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+

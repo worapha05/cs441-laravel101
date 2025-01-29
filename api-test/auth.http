@@ -1,0 +1,7 @@
+### POST request to login
+POST {{host}}/api/login
+Accept: application/json
+Content-Type: application/json
+
+{ "email" : "admin@example.com", "password" : "password" }
+###
