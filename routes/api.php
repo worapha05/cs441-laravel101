@@ -30,5 +30,5 @@ Route::middleware(['throttle:api', 'auth:sanctum'])->as('api.')->group(function 
 
     Route::delete('revoke', [AuthenticateController::class, 'revoke'])->name('user.revoke');
 
-    Route::apiResource('artists', ArtistController::class);
+//    Route::apiResource('artists', ArtistController::class);
 });

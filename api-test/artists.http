@@ -6,7 +6,7 @@ GET {{host}}/api/artists
 ###
 
 ### GET request to /api/artists/{id}
-GET {{host}}/api/artists/51
+GET {{host}}/api/artists/40
 Accept: application/json
 ###
 
